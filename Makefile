@@ -1,5 +1,5 @@
 
-IMAGE_NAME = s2i
+IMAGE_NAME = fast-style-s2i
 
 .PHONY: build
 build:
