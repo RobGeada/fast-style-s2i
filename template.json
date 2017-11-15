@@ -36,7 +36,7 @@
                         "name": "latest",
                         "from": {
                             "kind": "DockerImage",
-                            "name": "rgeda/fast-style-s2i:latest"
+                            "name": "rgeada/fast-style-s2i:latest"
                         }
                     }
                 ]
