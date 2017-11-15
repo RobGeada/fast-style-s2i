@@ -8,5 +8,10 @@
 #
 
 cd model
+echo "IMAGE = "$IMAGE
+echo "PORT = "$PORT
+wget $IMAGE -O /content/
 #python evaluate.py --checkpoint $(pwd)/wave.ckpt --in-path $(pwd)/content --out-path $(pwd)/results
 python evaluate.py --checkpoint $(pwd)/wave.ckpt --in-path /content/ --out-path $(pwd)/results
+cd $(pwd)/results
+python -m SimpleHTTPServer $PORT 
