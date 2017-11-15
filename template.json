@@ -146,7 +146,7 @@
                                 "image": "${APPLICATION_NAME}:latest",
                                 "ports": [
                                     {
-                                        "containerPort": 6006,
+                                        "containerPort": 8080,
                                         "protocol": "TCP"
                                     }
                                 ]
@@ -169,10 +169,10 @@
             "spec": {
                 "ports": [
                     {
-                        "name": "6006-tcp",
+                        "name": "8080-tcp",
                         "protocol": "TCP",
-                        "port": 6006,
-                        "targetPort": 6006
+                        "port": 8080,
+                        "targetPort": 8080
                     }
                 ],
                 "selector": {
