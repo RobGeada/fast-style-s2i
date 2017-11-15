@@ -26,7 +26,7 @@ COPY s2i /opt/app-root/s2i
 COPY model model
 COPY content content
 
-
+EXPOSE 8080
 
 # TODO: Set the default CMD for the image
 CMD ["/usr/libexec/s2i/usage"]
