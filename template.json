@@ -2,9 +2,9 @@
     "kind": "Template",
     "apiVersion": "v1",
     "metadata": {
-        "name": "neural-style",
+        "name": "fast-style",
         "annotations": {
-            "description": "neural-style",
+            "description": "fast-style",
             "tags": "tf-app"
         }
     },
@@ -15,7 +15,7 @@
             "metadata": {
                 "name": "${APPLICATION_NAME}",
                 "labels": {
-                    "appid": "neural-style-${APPLICATION_NAME}",
+                    "appid": "fast-style-${APPLICATION_NAME}",
                     "appName": "${APPLICATION_NAME}"
                 }
             }
@@ -26,7 +26,7 @@
             "metadata": {
                 "name": "${APPLICATION_NAME}-s2i",
                 "labels": {
-                    "appid": "neural-style-${APPLICATION_NAME}",
+                    "appid": "fast-style-${APPLICATION_NAME}",
                     "appName": "${APPLICATION_NAME}"
                 }
             },
@@ -48,7 +48,7 @@
             "metadata": {
                 "name": "${APPLICATION_NAME}",
                 "labels": {
-                    "appid": "neural-style-${APPLICATION_NAME}",
+                    "appid": "fast-style-${APPLICATION_NAME}",
                     "appName": "${APPLICATION_NAME}"
                 }
             },
@@ -65,8 +65,7 @@
                     "type": "Git",
                     "git": {
                         "uri": "${SOURCE_REPOSITORY}"
-                    },
-                    "contextDir": "${SOURCE_DIRECTORY}"
+                    }
                 },
                 "strategy": {
                     "type": "Source",
@@ -91,7 +90,7 @@
             "metadata": {
                 "name": "${APPLICATION_NAME}",
                 "labels": {
-                    "appid": "neural-style-${APPLICATION_NAME}",
+                    "appid": "fast-style-${APPLICATION_NAME}",
                     "appName": "${APPLICATION_NAME}"
                 }
             },
@@ -124,7 +123,7 @@
                 "template": {
                     "metadata": {
                         "labels": {
-                            "appid": "neural-style-${APPLICATION_NAME}",
+                            "appid": "fast-style-${APPLICATION_NAME}",
                             "deploymentconfig": "${APPLICATION_NAME}",
                             "appName": "${APPLICATION_NAME}"
                         }
@@ -133,10 +132,6 @@
                         "containers": [
                             {
                                 "env": [
-                                    {
-                                        "name": "IMAGE",
-                                        "value": "${IMAGE}"
-                                    },
                                     {
                                         "name": "PORT",
                                         "value": "${PORT}"
@@ -162,7 +157,7 @@
             "metadata": {
                 "name": "${APPLICATION_NAME}",
                 "labels": {
-                    "appid": "neural-style-${APPLICATION_NAME}",
+                    "appid": "fast-style-${APPLICATION_NAME}",
                     "appName": "${APPLICATION_NAME}"
                 }
             },
@@ -185,25 +180,14 @@
         {
             "name": "APPLICATION_NAME",
             "description": "The name of the application.",
-            "value": "tf-app-server",
+            "value": "fast-style-server",
             "from": "[a-zA-Z0-9]{10}",
             "required": true
         },
         {
             "name": "SOURCE_REPOSITORY",
             "description": "Git repository for source.",
-            "value": "",
-            "required": true
-        },
-        {
-            "name": "SOURCE_DIRECTORY",
-            "description": "Sub-directory of repository for source files.",
-            "value": "",
-            "required": false
-        },{
-            "name": "IMAGE",
-            "description": " input image.",
-            "value": "",
+            "value": "https://github.com/RobGeada/fast-style-s2i",
             "required": true
         },{
             "name": "PORT",

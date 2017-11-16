@@ -12,7 +12,7 @@ import json
 import subprocess
 import numpy
 
-BATCH_SIZE = 4
+BATCH_SIZE = 1
 DEVICE = '/cpu:0'
 
 def ffwd(data_in, paths_out, checkpoint_dir, device_t='/cpu:0', batch_size=4):
@@ -21,7 +21,8 @@ def ffwd(data_in, paths_out, checkpoint_dir, device_t='/cpu:0', batch_size=4):
     if data_in[0][-5:]=="Store":
         data_in = data_in[1:]
         paths_out=paths_out[1:]
-    print("Processing: ",data_in)
+    print(data_in)
+    print(paths_out)
     if is_paths:
         assert len(data_in) == len(paths_out)
         img_shape = get_img(data_in[0]).shape
@@ -60,41 +61,23 @@ def ffwd(data_in, paths_out, checkpoint_dir, device_t='/cpu:0', batch_size=4):
                 assert img.shape == img_shape, \
                     'Images have different dimensions. ' +  \
                     'Resize images or use --allow-different-dimensions.'
-                X[j] = img
+                X[j] = np.array(img,dtype=np.float32)
         else:
             X = data_in[pos:pos+batch_size]
 
-        print("Beginning processing...")
+        print("sess in")
         _preds = sess.run(preds, feed_dict={img_placeholder:X})
 
-        print("Finished!")
+        print("sess out")
         for j, path_out in enumerate(curr_batch_out):
-            save_img(path_out, _preds[j])   
+            save_img(path_out, _preds[j])
+        print("4")     
         remaining_in = data_in[num_iters*batch_size:]
         remaining_out = paths_out[num_iters*batch_size:]
-    
-    if len(remaining_in) > 0:
-        ffwd(remaining_in, remaining_out, checkpoint_dir, 
-            device_t=device_t, batch_size=1)
 
-def ffwd_to_img(in_path, out_path, checkpoint_dir, device='/gpu:0'):
+def ffwd_to_img(in_path, out_path, checkpoint_dir, device='/cpu:0'):
     paths_in, paths_out = [in_path], [out_path]
     ffwd(paths_in, paths_out, checkpoint_dir, batch_size=1, device_t=device)
-
-def ffwd_different_dimensions(in_path, out_path, checkpoint_dir, 
-            device_t=DEVICE, batch_size=4):
-    in_path_of_shape = defaultdict(list)
-    out_path_of_shape = defaultdict(list)
-    for i in range(len(in_path)):
-        in_image = in_path[i]
-        out_image = out_path[i]
-        shape = "%dx%dx%d" % get_img(in_image).shape
-        in_path_of_shape[shape].append(in_image)
-        out_path_of_shape[shape].append(out_image)
-    for shape in in_path_of_shape:
-        print('Processing images of shape %s' % shape)
-        ffwd(in_path_of_shape[shape], out_path_of_shape[shape], 
-            checkpoint_dir, device_t, batch_size)
 
 def build_parser():
     parser = ArgumentParser()
@@ -133,14 +116,19 @@ def check_opts(opts):
         exists(opts.out_path, 'out dir not found!')
         assert opts.batch_size > 0
 
+def cleanOut(path):
+    for file in os.listdir(path):
+        os.remove(path+"/"+file)
+
 def main():
     parser = build_parser()
     opts = parser.parse_args()
     check_opts(opts)
     if not os.path.isdir(opts.in_path):
         if os.path.exists(opts.out_path) and os.path.isdir(opts.out_path):
+            cleanOut(opts.out_path)
             out_path = \
-                    os.path.join(opts.out_path,os.path.basename(opts.in_path))
+                    os.path.join(opts.out_path,"fast-style.jpg")
         else:
             out_path = opts.out_path
 

@@ -1,5 +1,5 @@
 
-IMAGE_NAME = fast-style-s2i
+IMAGE_NAME = rgeada/fast-style-s2i
 
 .PHONY: build
 build:

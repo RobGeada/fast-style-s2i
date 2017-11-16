@@ -7,6 +7,4 @@
 #	https://github.com/openshift/source-to-image/blob/master/docs/builder_image.md
 #
 
-echo "PORT = "$PORT
-cd model
-python webserver.py $PORT
+echo "I worked!"
