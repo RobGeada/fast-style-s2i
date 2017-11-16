@@ -7,6 +7,11 @@
 #	https://github.com/openshift/source-to-image/blob/master/docs/builder_image.md
 #
 
+if [ -z "$PORT" ]; then
+	PORT=8080
+fi
+
 echo "PORT = "$PORT
+
 cd model
 python webserver.py $PORT

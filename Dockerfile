@@ -13,17 +13,22 @@ RUN yum install -y epel-release
 RUN yum install -y tree which python-pip \
 	&& yum clean all -y
 	
-RUN pip install tensorflow
+RUN pip install tensorflow scipy Pillow
 
 COPY ./s2i/bin/ /usr/libexec/s2i
+COPY model model
 
 #Drop the root user and make the content of /opt/app-root owned by user 1001
 RUN chown -R 1001:1001 /opt/app-root
+RUN chown -R 1001:1001 model
 
 # This default user is created in the openshift/base-centos7 image
 USER 1001
+
 COPY s2i /opt/app-root/s2i
-COPY model model
+
+
+
 
 EXPOSE 8080
 
