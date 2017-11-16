@@ -123,6 +123,7 @@ class SimpleHTTPRequestHandler(BaseHTTPServer.BaseHTTPRequestHandler):
                             cwd+'/content/'+imgName,\
                             '--out-path',\
                             cwd+'/results']
+                print(evaluator)
                 subprocess.call(evaluator)
 
 
