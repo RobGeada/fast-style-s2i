@@ -118,7 +118,7 @@ class SimpleHTTPRequestHandler(BaseHTTPServer.BaseHTTPRequestHandler):
                 evaluator = ['python',\
                              'evaluate.py',\
                              '--checkpoint',\
-                             cwd+'/wave.ckpt',\
+                             cwd+'/waveCO.ckpt',\
                             '--in-path',\
                             cwd+'/content/'+imgName,\
                             '--out-path',\
