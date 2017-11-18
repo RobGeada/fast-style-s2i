@@ -118,7 +118,7 @@ class SimpleHTTPRequestHandler(BaseHTTPServer.BaseHTTPRequestHandler):
                 evaluator = ['python',\
                              'evaluate.py',\
                              '--checkpoint',\
-                             cwd+'/waveCO.ckpt',\
+                             cwd+'/wave.ckpt',\
                             '--in-path',\
                             cwd+'/content/'+imgName,\
                             '--out-path',\
@@ -195,7 +195,7 @@ class SimpleHTTPRequestHandler(BaseHTTPServer.BaseHTTPRequestHandler):
         f.write("<form ENCTYPE=\"multipart/form-data\" method=\"post\">")
         f.write("<input name=\"file\" type=\"file\"/>")
         f.write("<input type=\"submit\" value=\"Style!\"/></form>\n")
-        f.write("<hr>\n</body>\n</html>\n")
+        f.write("<hr>\nStyling can take a few seconds, so be patient!</body>\n</html>\n")
         length = f.tell()
         f.seek(0)
         self.send_response(200)

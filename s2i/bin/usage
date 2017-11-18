@@ -3,13 +3,8 @@ cat <<EOF
 
 Usage: 
 
-oc create -f https://raw.githubusercontent.com/radanalyticsio/tensorflow-serving-s2i/master/template.json
 oc create -f template.json
 oc new-app --template=fast-style
 
 EOF
-
-
-
-python evaluate.py --checkpoint $(pwd)/wave.ckpt --in-path $(pwd)/content/margeret.* --out-path $(pwd)/results
     
