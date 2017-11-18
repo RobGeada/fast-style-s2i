@@ -1,5 +1,7 @@
 # fast-style-s2i
 
+An s2i builder and web interface for Logan Engstroms [fast-style-transfer](https://github.com/lengstrom/fast-style-transfer) for local and OpenShift usage.
+
 ## Usage (Local)
 
 ```
