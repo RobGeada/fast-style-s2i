@@ -27,9 +27,6 @@ USER 1001
 
 COPY s2i /opt/app-root/s2i
 
-
-
-
 EXPOSE 8080
 
 # TODO: Set the default CMD for the image

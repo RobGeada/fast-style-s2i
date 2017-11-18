@@ -11,5 +11,5 @@ EOF
 
 
 
-
+python evaluate.py --checkpoint $(pwd)/wave.ckpt --in-path $(pwd)/content/margeret.* --out-path $(pwd)/results
     
